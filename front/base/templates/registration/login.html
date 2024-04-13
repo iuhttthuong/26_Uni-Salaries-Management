@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<img src="{% static 'image/3.jpg' %}" style="max-height: 620px; width: 620px; border-radius: 10px;">
+<div class="shadow-wrap" >
+ <div class="form-wrap">
+  <h2>Cổng đăng nhập IUH</h2>
+<form method="POST">
+ {% csrf_token %}
+ 
+ {{form}}
+ <button type="submit">Đăng nhập</button>
+</form>
+</div>
+{% endblock content %}a
