@@ -72,6 +72,13 @@ def add_taikhoan():
         taikhoan, created = TAIKHOAN.objects.get_or_create(
             giang_vien=giang_vien, defaults={'MATKHAU': data['MATKHAU']})
         print(f"Đã thêm tài khoản cho: {giang_vien.HOTEN}" if created else f"Đã tồn tại tài khoản cho: {giang_vien.HOTEN}")
+        
+def tinh_luong():
+    giangvien = GIANGVIEN.objects.all()
+    for gv in giangvien:
+        hesoluong = HESOLUONG.objects.get(MABAC=gv.MABAC)
+        luong = gv.MABAC.HESO.HESO * 1000000
+        print(f"{gv.HOTEN} có mức lương: {luong}")
 
 def main():
     add_trinhdo()
