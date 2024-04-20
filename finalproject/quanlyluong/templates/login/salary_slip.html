@@ -1,0 +1,32 @@
+{% extends 'login/emp_base.html' %}
+
+{% block main %}
+<div class="container">
+    <h2>Phiếu Lương</h2>
+    <table class="table">
+        <tr>
+            <th>Họ và Tên:</th>
+            <td>{{ teacher.HOTEN }}</td>
+        </tr>
+        <tr>
+            <th>Ngày sinh:</th>
+            <td>{{ teacher.NGAYSINH }}</td>
+        </tr>
+        <tr>
+            <th>Hệ số lương:</th>
+            <td>{{ hesoluong }}</td>
+        </tr>
+        <tr>
+            <th>Lương cơ bản:</th>
+            <td>{{ base_salary }}</td>
+        </tr>
+        <tr>
+            <th>Tổng lương:</th>
+            <td>{{ calculated_salary }}</td>
+        </tr>
+    </table>
+    <div class="text-center">
+        <button onclick="window.print()" class="btn btn-primary">In Phiếu Lương</button>
+    </div>
+</div>
+{% endblock %}

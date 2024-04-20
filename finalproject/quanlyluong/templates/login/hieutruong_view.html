@@ -1,0 +1,21 @@
+{% extends 'login/hieutruong_base.html' %}
+{% load static %}
+{% block main %}
+    <h4 class="text-danger p-2" style="border-bottom: 2px solid orange; text-align: center;">Thông Tin Chi Tiết Giảng Viên</h4>
+    <div class="row justify-content-center">
+        <div class="col-md-8 mb-4"> <!-- Đã thay đổi col-md-4 thành col-md-6 -->
+            <div class="card shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ giang_vien.HOTEN }}</h5>
+                    <img src="{% static 'app/images/ketoan.jpg' %}" alt="Avatar" class="img-fluid mb-3">
+                    <p class="card-text">Ngày sinh: {{ giang_vien.NGAYSINH }}</p>
+                    <p class="card-text">Giới tính: {% if giang_vien.GIOITINH %} Nam {% else %} Nữ {% endif %}</p>
+                    <p class="card-text">Số điện thoại: {{ giang_vien.SODIENTHOAI }}</p>
+                    <p class="card-text">Địa chỉ: {{ giang_vien.DIACHI }}</p>
+                    <p class="card-text">Ngày Vào Làm: {{ giang_vien.NGAYVAOLAM }}</p>
+                    <p class="card-text">Chức vụ: {{ giang_vien.CHUCVU }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

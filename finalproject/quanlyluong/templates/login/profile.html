@@ -1,0 +1,24 @@
+{% extends "login/emp_base.html" %}
+
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Thông tin cá nhân</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Họ và tên:</strong> {{ giangvien.HOTEN }}</p>
+                    <p><strong>Ngày sinh:</strong> {{ giangvien.NGAYSINH }}</p>
+                    <p><strong>Giới tính:</strong> {% if giangvien.GIOITINH %} Nam {% else %} Nữ {% endif %}</p>
+                    <p><strong>Số điện thoại:</strong> {{ giangvien.SODIENTHOAI }}</p>
+                    <p><strong>Địa chỉ:</strong> {{ giangvien.DIACHI }}</p>
+                    <p><strong>Chức vụ:</strong> {{ giangvien.CHUCVU }}</p>
+                    <p><strong>Ngày vào làm:</strong> {{ giangvien.NGAYVAOLAM }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

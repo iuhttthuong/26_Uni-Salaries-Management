@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- js  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <title>Hệ Thống Chấm Công</title>
+    <style>
+        .list-group-item {
+        padding: 8px !important;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2 p-0">
+            <center><img src="{% static 'app/images/icon.png' %}" width="100" height="100" class="img-thumbnail rounded-circle my-3"></center>
+            <div class="list-group">
+                <a href="{% url 'hieutruong_home'  %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'hieutruong_home' %}active{% endif %}">TRANG CHỦ</a>
+                <a href="{% url 'hieutruong_profile' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'hieutruong_profile' %}active{% endif %}">THÔNG TIN CÁ NHÂN</a>
+                <a href="{% url 'hieutruong_search' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'hieutruong_search' %}active{% endif %}">TÌM KIẾM GIẢNG VIÊN</a>
+                {% comment %} <a href="{% url 'search' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'view' %}active{% endif %}">XEM THÔNG TIN GIẢNG VIÊN</a>
+                <a href="{% url 'search' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'update_salary' %}active{% endif %}">CẬP NHẬT HỆ SỐ LƯƠNG</a>
+                <a href="{% url 'search' %}" class="list-group-item list-group-item-warning list-group-item-action">IN PHIẾU LƯƠNG</a> {% endcomment %}
+            </div>
+        </div>
+        <div class="col-sm-10">
+            <div class="container-fluid p-2">
+                <h5 class="text-center p-3 font-weight-bold" style="border-bottom : 2px solid green ; border-top : 2px solid green">Hiệu Trưởng</h5>
+                
+                <div class="card shadow" style="min-height : 89vh">
+                    <div class="card-body">
+                        {% block main %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
