@@ -22,5 +22,7 @@ urlpatterns = [
     path('giangvien_home/', views.giangvien_home, name='giangvien_home'),
     path('giangvien_profile/', views.giangvien_profile,
          name='giangvien_profile'),
-
+    path('logout_giangvien/', views.logout_giangvien, name='logout_giangvien'),
+    path('logout_ketoan/', views.logout_ketoan, name='logout_ketoan'),
+    path('logout_hieutruong/', views.logout_hieutruong, name='logout_hieutruong'),
 ]

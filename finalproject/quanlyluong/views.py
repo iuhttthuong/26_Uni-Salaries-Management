@@ -170,3 +170,48 @@ def hieutruong_salary_slip(request, magiangvien):
         'calculated_salary': calculated_salary
     }
     return render(request, 'login/hieutruong_salary_slip.html', context)
+
+
+def logout_giangvien(request):
+    # Kiểm tra xem session 'user_id' có tồn tại không
+    if 'user_id' in request.session:
+        # Xóa 'user_id' khỏi session
+        del request.session['user_id']
+        # Gửi thông báo đăng xuất thành công
+        messages.success(request, 'Bạn đã đăng xuất thành công.')
+    else:
+        # Gửi thông báo người dùng không đăng nhập
+        messages.error(request, 'Bạn chưa đăng nhập.')
+
+    # Chuyển hướng đến trang đăng nhập
+    return render(request, 'login/loginpage.html')
+
+
+def logout_ketoan(request):
+    # Kiểm tra xem session 'user_id' có tồn tại không
+    if 'user_id' in request.session:
+        # Xóa 'user_id' khỏi session
+        del request.session['user_id']
+        # Gửi thông báo đăng xuất thành công
+        messages.success(request, 'Bạn đã đăng xuất thành công.')
+    else:
+        # Gửi thông báo người dùng không đăng nhập
+        messages.error(request, 'Bạn chưa đăng nhập.')
+
+    # Chuyển hướng đến trang đăng nhập
+    return render(request, 'login/loginpage.html')
+
+
+def logout_hieutruong(request):
+    # Kiểm tra xem session 'user_id' có tồn tại không
+    if 'user_id' in request.session:
+        # Xóa 'user_id' khỏi session
+        del request.session['user_id']
+        # Gửi thông báo đăng xuất thành công
+        messages.success(request, 'Bạn đã đăng xuất thành công.')
+    else:
+        # Gửi thông báo người dùng không đăng nhập
+        messages.error(request, 'Bạn chưa đăng nhập.')
+
+    # Chuyển hướng đến trang đăng nhập
+    return render(request, 'login/loginpage.html')

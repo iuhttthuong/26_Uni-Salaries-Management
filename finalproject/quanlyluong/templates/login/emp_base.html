@@ -27,9 +27,7 @@
                 <a href="{% url 'emp_home'  %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'emp_home' %}active{% endif %}">TRANG CHỦ</a>
                 <a href="{% url 'profile' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'profile' %}active{% endif %}">THÔNG TIN CÁ NHÂN</a>
                 <a href="{% url 'search' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'search' %}active{% endif %}">TÌM KIẾM GIẢNG VIÊN</a>
-                {% comment %} <a href="{% url 'search' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'view' %}active{% endif %}">XEM THÔNG TIN GIẢNG VIÊN</a>
-                <a href="{% url 'search' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'update_salary' %}active{% endif %}">CẬP NHẬT HỆ SỐ LƯƠNG</a>
-                <a href="{% url 'search' %}" class="list-group-item list-group-item-warning list-group-item-action">IN PHIẾU LƯƠNG</a> {% endcomment %}
+                <a href="{% url 'quanlyluong' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'logout_ketoan' %}active{% endif %} ">ĐĂNG XUẤT</a>
             </div>
         </div>
         <div class="col-sm-10">

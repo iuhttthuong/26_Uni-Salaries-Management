@@ -24,12 +24,10 @@
         <div class="col-sm-2 p-0">
             <center><img src="{% static 'app/images/icon.png' %}" width="100" height="100" class="img-thumbnail rounded-circle my-3"></center>
             <div class="list-group">
-                <a href="{% url 'giangvien_home'  %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'emp_home' %}active{% endif %}">TRANG CHỦ</a>
-                <a href="{% url 'giangvien_profile' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'profile' %}active{% endif %}">THÔNG TIN CÁ NHÂN</a>
-                {% comment %} <a href="{% url 'search' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'search' %}active{% endif %}">TÌM KIẾM GIẢNG VIÊN</a> {% endcomment %}
-                {% comment %} <a href="{% url 'search' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'view' %}active{% endif %}">XEM THÔNG TIN GIẢNG VIÊN</a>
-                <a href="{% url 'search' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'update_salary' %}active{% endif %}">CẬP NHẬT HỆ SỐ LƯƠNG</a>
-                <a href="{% url 'search' %}" class="list-group-item list-group-item-warning list-group-item-action">IN PHIẾU LƯƠNG</a> {% endcomment %}
+                <a href="{% url 'giangvien_home'  %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'giangvien_home' %}active{% endif %}">TRANG CHỦ</a>
+                <a href="{% url 'giangvien_profile' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'giangvien_profile' %}active{% endif %}">THÔNG TIN CÁ NHÂN</a>
+                <a href="{% url 'quanlyluong' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'logout_giangvien' %}active{% endif %} ">ĐĂNG XUẤT</a>
+
             </div>
         </div>
         <div class="col-sm-10">
