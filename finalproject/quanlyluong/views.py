@@ -165,10 +165,10 @@ def update_salary(request, mabac):
 def salary_slip(request, magiangvien):
     try:
         teacher = get_object_or_404(GIANGVIEN, pk=magiangvien)
-        hesoluong = HESOLUONG.objects.get(MABAC=teacher.MABAC_id)
+        hesoluong = HESOLUONG.objects.get(MABAC=teacher.MABAC_id, MANGACH=teacher.MANGACH_id)
     except HESOLUONG.DoesNotExist:
         return HttpResponse("Salary coefficient not found for the provided instructor.", status=404)
-    base_salary = 5000000
+    base_salary = 1800000
     calculated_salary = base_salary * hesoluong.HESO
     context = {
         'teacher': teacher,
@@ -182,18 +182,20 @@ def salary_slip(request, magiangvien):
 def hieutruong_salary_slip(request, magiangvien):
     try:
         teacher = get_object_or_404(GIANGVIEN, pk=magiangvien)
-        hesoluong = HESOLUONG.objects.get(MABAC=teacher.MABAC_id)
+        hesoluong = HESOLUONG.objects.get(MABAC=teacher.MABAC_id, MANGACH=teacher.MANGACH_id)
+        base_salary = 1800000
+        calculated_salary = base_salary * hesoluong.HESO
+        context = {
+            'teacher': teacher,
+            'base_salary': base_salary,
+            'hesoluong': hesoluong.HESO,
+            'calculated_salary': calculated_salary
+        }
+        return render(request, 'login/hieutruong_salary_slip.html', context)
     except HESOLUONG.DoesNotExist:
         return HttpResponse("Salary coefficient not found for the provided instructor.", status=404)
-    base_salary = 5000000
-    calculated_salary = base_salary * hesoluong.HESO
-    context = {
-        'teacher': teacher,
-        'base_salary': base_salary,
-        'hesoluong': hesoluong.HESO,
-        'calculated_salary': calculated_salary
-    }
-    return render(request, 'login/hieutruong_salary_slip.html', context)
+    except HESOLUONG.MultipleObjectsReturned:
+        return HttpResponse("Data inconsistency error.", status=500)
 
 
 def logout_giangvien(request):
