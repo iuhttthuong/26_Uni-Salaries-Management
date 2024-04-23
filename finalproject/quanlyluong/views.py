@@ -144,7 +144,7 @@ def salary_slip(request, magiangvien):
         hesoluong = HESOLUONG.objects.get(MABAC=teacher.MABAC_id, MANGACH=teacher.MANGACH_id)
     except HESOLUONG.DoesNotExist:
         return HttpResponse("Salary coefficient not found for the provided instructor.", status=404)
-    base_salary = 180000
+    base_salary = 1800000
     calculated_salary = base_salary * hesoluong.HESO
     context = {
         'teacher': teacher,
@@ -159,7 +159,7 @@ def hieutruong_salary_slip(request, magiangvien):
     try:
         teacher = get_object_or_404(GIANGVIEN, pk=magiangvien)
         hesoluong = HESOLUONG.objects.get(MABAC=teacher.MABAC_id, MANGACH=teacher.MANGACH_id)
-        base_salary = 180000
+        base_salary = 1800000
         calculated_salary = base_salary * hesoluong.HESO
         context = {
             'teacher': teacher,
