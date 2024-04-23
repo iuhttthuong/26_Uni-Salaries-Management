@@ -19,7 +19,7 @@ def login_hieutruong(request):
                 return redirect('hieutruong_home')
             else:
                 messages.error(
-                    request, 'Tên người dùng hoặc mật khẩu không đúng hoặc không có quyền truy cập.')
+                    request, 'Lỗi đăng nhập')
         except TAIKHOAN.DoesNotExist:
             messages.error(request, 'Tên người dùng hoặc mật khẩu không đúng.')
     return render(request, 'login/login_hieutruong.html')
@@ -38,7 +38,7 @@ def login_giangvien(request):
                 return redirect('giangvien_home')
             else:
                 messages.error(
-                    request, 'Tên người dùng hoặc mật khẩu không đúng hoặc không có quyền truy cập.')
+                    request, 'Lỗi đăng nhập')
         except TAIKHOAN.DoesNotExist:
             messages.error(request, 'Tên người dùng hoặc mật khẩu không đúng.')
     return render(request, 'login/login_giangvien.html')
@@ -57,7 +57,7 @@ def login_ketoan(request):
                 return redirect('emp_home')
             else:
                 messages.error(
-                    request, 'Tên người dùng hoặc mật khẩu không đúng hoặc không có quyền truy cập.')
+                    request, 'Lỗi đăng nhập')
         except TAIKHOAN.DoesNotExist:
             messages.error(request, 'Tên người dùng hoặc mật khẩu không đúng.')
     return render(request, 'login/login_ketoan.html')
@@ -165,7 +165,8 @@ def update_salary(request, mabac):
 def salary_slip(request, magiangvien):
     try:
         teacher = get_object_or_404(GIANGVIEN, pk=magiangvien)
-        hesoluong = HESOLUONG.objects.get(MABAC=teacher.MABAC_id, MANGACH=teacher.MANGACH_id)
+        hesoluong = HESOLUONG.objects.get(
+            MABAC=teacher.MABAC_id, MANGACH=teacher.MANGACH_id)
     except HESOLUONG.DoesNotExist:
         return HttpResponse("Salary coefficient not found for the provided instructor.", status=404)
     base_salary = 1800000
@@ -182,7 +183,8 @@ def salary_slip(request, magiangvien):
 def hieutruong_salary_slip(request, magiangvien):
     try:
         teacher = get_object_or_404(GIANGVIEN, pk=magiangvien)
-        hesoluong = HESOLUONG.objects.get(MABAC=teacher.MABAC_id, MANGACH=teacher.MANGACH_id)
+        hesoluong = HESOLUONG.objects.get(
+            MABAC=teacher.MABAC_id, MANGACH=teacher.MANGACH_id)
         base_salary = 1800000
         calculated_salary = base_salary * hesoluong.HESO
         context = {
