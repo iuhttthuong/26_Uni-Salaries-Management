@@ -26,7 +26,7 @@
             <div class="list-group">
                 <a href="{% url 'giangvien_home'  %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'giangvien_home' %}active{% endif %}">TRANG CHỦ</a>
                 <a href="{% url 'giangvien_profile' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'giangvien_profile' %}active{% endif %}">THÔNG TIN CÁ NHÂN</a>
-                <a href="{% url 'quanlyluong' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'logout_giangvien' %}active{% endif %} ">ĐĂNG XUẤT</a>
+                <a href="{% url 'login_giangvien' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'logout_giangvien' %}active{% endif %} ">ĐĂNG XUẤT</a>
 
             </div>
         </div>

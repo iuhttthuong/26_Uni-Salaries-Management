@@ -6,37 +6,61 @@ from django.template import loader
 from django.http import HttpResponse
 
 
-def login(request):
+def login_hieutruong(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
         try:
             tai_khoan = TAIKHOAN.objects.get(giang_vien_id=username)
-            if password == tai_khoan.MATKHAU:
+            if password == tai_khoan.MATKHAU and tai_khoan.giang_vien.CHUCVU == 'HIEUTRUONG':
                 request.session['user_id'] = username
-                giang_vien = GIANGVIEN.objects.get(MAGIANGVIEN=username)
                 messages.success(
-                    request, f'Đăng nhập thành công. Chào mừng, {giang_vien.HOTEN}!')
-
-                if giang_vien.CHUCVU == 'HIEUTRUONG':
-                    # Trang chủ cho Hiệu Trưởng
-                    return redirect('hieutruong_home')
-                elif giang_vien.CHUCVU == 'GIANGVIEN':
-                    # Trang chủ cho Giảng viên
-                    return redirect('giangvien_home')
-                elif giang_vien.CHUCVU == 'KETOAN':
-                    # Trang chủ cho Kế toán
-                    return redirect('emp_home')
-                else:
-                    # Chuyển hướng về trang đăng nhập nếu không có chức vụ hợp lệ
-                    return redirect('login')
-
+                    request, f'Đăng nhập thành công. Chào mừng, {tai_khoan.giang_vien.HOTEN}!')
+                return redirect('hieutruong_home')
             else:
                 messages.error(
-                    request, 'Tên người dùng hoặc mật khẩu không đúng.')
+                    request, 'Tên người dùng hoặc mật khẩu không đúng hoặc không có quyền truy cập.')
         except TAIKHOAN.DoesNotExist:
             messages.error(request, 'Tên người dùng hoặc mật khẩu không đúng.')
-    return render(request, 'login/loginpage.html')
+    return render(request, 'login/login_hieutruong.html')
+
+
+def login_giangvien(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        try:
+            tai_khoan = TAIKHOAN.objects.get(giang_vien_id=username)
+            if password == tai_khoan.MATKHAU and tai_khoan.giang_vien.CHUCVU == 'GIANGVIEN':
+                request.session['user_id'] = username
+                messages.success(
+                    request, f'Đăng nhập thành công. Chào mừng, {tai_khoan.giang_vien.HOTEN}!')
+                return redirect('giangvien_home')
+            else:
+                messages.error(
+                    request, 'Tên người dùng hoặc mật khẩu không đúng hoặc không có quyền truy cập.')
+        except TAIKHOAN.DoesNotExist:
+            messages.error(request, 'Tên người dùng hoặc mật khẩu không đúng.')
+    return render(request, 'login/login_giangvien.html')
+
+
+def login_ketoan(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        try:
+            tai_khoan = TAIKHOAN.objects.get(giang_vien_id=username)
+            if password == tai_khoan.MATKHAU and tai_khoan.giang_vien.CHUCVU == 'KETOAN':
+                request.session['user_id'] = username
+                messages.success(
+                    request, f'Đăng nhập thành công. Chào mừng, {tai_khoan.giang_vien.HOTEN}!')
+                return redirect('emp_home')
+            else:
+                messages.error(
+                    request, 'Tên người dùng hoặc mật khẩu không đúng hoặc không có quyền truy cập.')
+        except TAIKHOAN.DoesNotExist:
+            messages.error(request, 'Tên người dùng hoặc mật khẩu không đúng.')
+    return render(request, 'login/login_ketoan.html')
 
 
 def main(request):
@@ -184,7 +208,7 @@ def logout_giangvien(request):
         messages.error(request, 'Bạn chưa đăng nhập.')
 
     # Chuyển hướng đến trang đăng nhập
-    return render(request, 'login/loginpage.html')
+    return render(request, 'login/login_giangvien.html')
 
 
 def logout_ketoan(request):
@@ -199,7 +223,7 @@ def logout_ketoan(request):
         messages.error(request, 'Bạn chưa đăng nhập.')
 
     # Chuyển hướng đến trang đăng nhập
-    return render(request, 'login/loginpage.html')
+    return render(request, 'login/login_ketoan.html')
 
 
 def logout_hieutruong(request):
@@ -214,4 +238,4 @@ def logout_hieutruong(request):
         messages.error(request, 'Bạn chưa đăng nhập.')
 
     # Chuyển hướng đến trang đăng nhập
-    return render(request, 'login/loginpage.html')
+    return render(request, 'login/login_hieutruong.html')

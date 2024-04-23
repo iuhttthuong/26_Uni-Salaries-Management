@@ -27,7 +27,7 @@
                 <a href="{% url 'hieutruong_home'  %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'hieutruong_home' %}active{% endif %}">TRANG CHỦ</a>
                 <a href="{% url 'hieutruong_profile' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'hieutruong_profile' %}active{% endif %}">THÔNG TIN CÁ NHÂN</a>
                 <a href="{% url 'hieutruong_search' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'hieutruong_search' %}active{% endif %}">TÌM KIẾM GIẢNG VIÊN</a>
-                <a href="{% url 'quanlyluong' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'logout_hieutruong' %}active{% endif %} ">ĐĂNG XUẤT</a>
+                <a href="{% url 'login_hieutruong' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'logout_hieutruong' %}active{% endif %} ">ĐĂNG XUẤT</a>
             </div>
         </div>
         <div class="col-sm-10">

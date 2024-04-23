@@ -1,74 +1,97 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: 'Mulish', sans-serif;
     transition: 0.3s all ease-in-out;
-   }
-   body{
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   height: 100vh;
-   background-color:  rgb(29, 38, 154);
-   }
-   .shadow-wrap{
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgb(29, 38, 154);
+}
+
+.shadow-wrap {
     border-radius: 5px;
-    padding: 25px;
-    background-color:#F0F2FB;
-   }
-   .form-wrap{
+    padding: 15px;
+    background-color: #F0F2FB;
+}
+
+.form-wrap {
     background-color: #fff;
-   padding: 70px;
-   }
-   .form-wrap form *{
+    padding: 40px;
+    /* Giảm padding để giữ form nhỏ hơn */
+    max-width: 300px;
+    /* Thay đổi kích thước tối đa của form */
+    margin: auto;
+    /* Để form nằm giữa màn hình */
+}
+
+.form-wrap form * {
     display: block;
     width: 100%;
-   }
-   .form-wrap form label{
-   margin-bottom: 5px;
-   font-size: 14px;
-   font-weight: 700;
-   line-height: 26px; 
-   }
-   .form-wrap form input{
-   padding: 12px 20px;
-   border-radius: 5px;
-   border: 1px solid #DAE1F5;
-   background: #FFF; 
-   color: #545D7A; 
-   }
-   #id_username{
-    margin-bottom: 20px;
-   }
-   .form-wrap button{
+}
+
+.form-wrap form label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 26px;
+}
+
+.form-wrap form input {
+    padding: 12px 20px;
     border-radius: 5px;
-   background: #10182F;
-   color: #FFF;
-   cursor: pointer;
-   text-align: center;
-   font-size: 16px;
-   padding: 12px 68px;
-   font-weight: 700;
-   border: 1px solid transparent;
-   margin-top: 30px;
-   line-height: 26px; 
-   }
-   .signup-link{
+    border: 1px solid #DAE1F5;
+    background: #FFF;
+    color: #545D7A;
+    margin-bottom: 10px;
+    /* Thêm khoảng cách dưới cho input */
+}
+
+.form-wrap button {
+    border-radius: 5px;
+    background: #10182F;
+    color: #FFF;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+    padding: 12px 68px;
+    font-weight: 700;
+    border: 1px solid transparent;
+    margin-top: 30px;
+    line-height: 26px;
+}
+
+.signup-link {
     color: #10182F;
     font-size: 15px;
     margin-top: 20px;
     text-align: center;
     line-height: 25px;
     display: block;
-   text-decoration: none;
-   }
-   .signup-link:hover{
+    text-decoration: none;
+}
+
+.signup-link:hover {
     text-decoration: underline;
-   }
-   .form-wrap button:hover{
+}
+
+.form-wrap button:hover {
     background-color: #fff;
     color: #10182F;
     border-color: #10182F;
-   
-   }
+}
+
+.alert {
+    margin-top: 10px;
+    /* Thêm khoảng cách giữa form và thông báo */
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
