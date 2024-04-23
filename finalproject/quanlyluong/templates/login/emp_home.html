@@ -1,14 +1,8 @@
 {% extends 'login/emp_base.html' %}   
-
+{% load static %}
 {% block main %}
-    <h4 class="text-danger p-2" style="border-bottom: 2px solid orange;">Bảng Điều Khiển Nhân Viên</h4>
-    <div class="row text-center">
-        <div class="col-sm-12 p-2">
-            <div class="card shadow">
-                <div class="card-body">
-                    <h4 class="text-success">Chào Mừng Đến Với Hệ Thống</h4>
-                </div>
-            </div>
-        </div>    
+    <h4 class="text-danger p-2" style="border-bottom: 2px solid orange;">Chào Mừng Đến Với Hệ Thống</h4>
+    <div class="row">
+            <img src="{% static 'app/images/nen_ketoan.jpg' %}" alt="Welcome Image" class="img-fluid">   
     </div>
 {% endblock %}
