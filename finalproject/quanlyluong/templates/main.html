@@ -18,7 +18,7 @@
     <div class="grid-container">
       <header class="header">
         <div class="header-content">
-            <img src="{% static 'app/images/logo-iuh-inkythuatso-01-08-11-18-25.jpg' %}" class='image_iuh' style="max-height: 60px; width: auto; ">
+            <h1>Chương trình tính lương</h1>
           </div>
           <ul>
           <div style="display: flex; align-items: center;">
@@ -73,56 +73,29 @@
               <span class="material-icons-outlined">settings</span> Cài đặt
             </a>
           </li>
-          {% comment %} <li class="sidebar-list-item">
-                <a href="{% url "base:logout" %}" class="logout-button">
-                    <span class="material-icons-outlined">logout</span>
-                    Đăng xuất
-                </a>
-            </li> {% endcomment %}
         </ul>
       </aside>
       <main class="main-container">
-        <div class="main-title">
-          <h1>MÀN HÌNH CHÍNH</h1>
+        <div class="content-wrapper">
+        <img src="{% static 'app\images\anhnen.jpg' %}" class='image_iuh' style="height: 50%; width: auto; border-radius:10px">
+        <div class="text-box">
+          <h2>Về Trường</h2>
+          <p>
+            Trường Đại học Công nghiệp Thành phố Hồ Chí Minh là một trường đại học định hướng ứng dụng và thực hành, trực thuộc Bộ Công Thương, 
+            chuyên đào tạo nhóm ngành kinh tế công nghiệp và kỹ thuật công nghiệp, được thành lập từ ngày 24 tháng 12 năm 2004. 
+          </p>
         </div>
-        
-        <div class="main-cards">
-
-          <div class="card">
-            <div class="card-inner">
-              <h3>Tổng lương trong kỳ</h3>
-              <span class="material-symbols-outlined">
-                select_check_box</span>
-            </div>
-            <h1>120</h1>
-          </div>
-          
-          <div class="card">
-            <div class="card-inner">
-              <h3>Số tiết lên lớp</h3>
-              <span class="material-symbols-outlined">chronic</span>
-            </div>
-            <h1>300</h1>
-          </div>
-
-          <div class="card">
-            <div class="card-inner">
-              <h3>Số ngày nghỉ</h3>
-              <span class="material-symbols-outlined">cancel</span>
-            </div>
-            <h1>2</h1>
-          </div>
-
-          <div class="card">
-            <div class="card-inner">
-              <h2>Chức vụ</h2>
-              <span class="material-symbols-outlined">person_pin</span>
-            </div>
-            <h1>Giảng viên</h1>
-          </div>
-
         </div>
-        <hr class="divider-line">
+        <div class="box">
+          <h2>Về Team</h2>
+        </div>
+        <div class="box">
+          <h2>Thảo Luận</h2>
+        </div>
+        <div class="box">
+          <h2>Thông Báo</h2>
+        </div>
+        <p style="font-size:20px ;text-align:center;padding-top:15px">Chương trình được thực hiện bởi nhóm sinh viên trường Đại học Công nghiệp Thành phố Hồ Chí Minh</p>
       </main>
     </div>
   </body>
