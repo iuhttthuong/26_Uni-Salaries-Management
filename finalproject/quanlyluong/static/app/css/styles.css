@@ -67,9 +67,15 @@ body {
     transition: background-color 0.3s ease;
     }
 
-    .logout-button:hover {
-      background-color: rgb(red, green, blue); /* Darker red on hover */
-    }
+
+.menu-icon {
+  display: none;
+}
+
+.menu-icon .material-symbols-outlined {
+    font-size: 30px; /* Adjust size as needed */
+}
+
   /* ---------- HEADER ---------- */
   
   .header {
@@ -211,6 +217,12 @@ body {
   }
   .box h2 {
     margin-top: 20px; 
+  }
+  .box li{
+    margin-top: 20px;
+  }
+  .box p {
+    margin: 0;
   }
 
   @media screen and (max-width: 992px) {

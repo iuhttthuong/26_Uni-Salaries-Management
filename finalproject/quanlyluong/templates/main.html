@@ -11,41 +11,41 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="{% static 'app/css/styles.css' %}">
     <script src="{% static 'app/js/script.js' %}" defer></script>
   </head>
   <body>
     <div class="grid-container">
       <header class="header">
+        <div class="menu-icon" onclick="openSidebar()">
+          <span class="material-icons-outlined">menu</span> ID
+        </div>
         <div class="header-content">
             <h1>Chương trình tính lương</h1>
-          </div>
+          </div>  
           <ul>
           <div style="display: flex; align-items: center;">
             <span class="material-icons-outlined" style="margin-right: 15px;">email</span>
             <span class="material-icons-outlined" style="margin-right: 15px;">notifications</span>
           </div>
           </ul>
-      </header> 
+      </header>  
       <!-- End Header -->
       <!-- Sidebar -->
       <aside id="sidebar">
         <div class="sidebar-title">
+          
           <div class="sidebar-brand">
-            <span class="material-icons-outlined">apps</span> Menu 
+            <span class="material-icons-outlined" >apps</span> Menu 
           </div>
-          <span class="material-icons-outlined" onclick="closeSidebar()">close</span> 
+          <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
         </div>
         <ul class="sidebar-list">
           <li class="sidebar-list-item">
             
             <a href="#">
                 <span class="material-symbols-outlined">house</span> Trang chủ
-            </a>
-          </li>
-          <li class="sidebar-list-item">
-            <a href="#">
-              <span class="material-symbols-outlined">news</span> Phổ cập tin tức
             </a>
           </li>
           <li class="sidebar-list-item">
@@ -68,11 +68,11 @@
                 <span class="material-symbols-outlined">live_help</span> Hỗ trợ
             </a>
           </li>
-          <li class="sidebar-list-item">
+          {% comment %} <li class="sidebar-list-item">
             <a href="#">
               <span class="material-icons-outlined">settings</span> Cài đặt
             </a>
-          </li>
+          </li> {% endcomment %}
         </ul>
       </aside>
       <main class="main-container">
@@ -88,12 +88,17 @@
         </div>
         <div class="box">
           <h2>Về Team</h2>
+          <li> Xem thông tin</li>
         </div>
         <div class="box">
           <h2>Thảo Luận</h2>
+          <p>
+            <li >Mọi khắc mắc xin liên hệ qua</li>
+            <a href="https://www.facebook.com/hau.trong.121">Facebook</a>
         </div>
         <div class="box">
           <h2>Thông Báo</h2>
+          <li>Cập nhật phiên bản 1.0</li>
         </div>
         <p style="font-size:20px ;text-align:center;padding-top:15px">Chương trình được thực hiện bởi nhóm sinh viên trường Đại học Công nghiệp Thành phố Hồ Chí Minh</p>
       </main>
