@@ -27,4 +27,6 @@ urlpatterns = [
     path('logout_giangvien/', views.logout_giangvien, name='logout_giangvien'),
     path('logout_ketoan/', views.logout_ketoan, name='logout_ketoan'),
     path('logout_hieutruong/', views.logout_hieutruong, name='logout_hieutruong'),
+    path('giangvien_search/', views.giangvien_search, name='giangvien_search'),
+    path('giangvien_view/<int:magiangvien>/', views.giangvien_view, name='giangvien_view'),
 ]

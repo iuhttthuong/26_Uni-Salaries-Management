@@ -123,6 +123,12 @@ def search(request):
         giang_viens = GIANGVIEN.objects.filter(HOTEN__icontains=query)
     return render(request, 'login/search.html', {'giang_viens': giang_viens, 'query': query})
 
+def giangvien_search(request):
+    giang_viens = None  # Đặt giang_viens là None hoặc một QuerySet rỗng
+    query = request.GET.get('q')
+    if query:  # Chỉ thực hiện truy vấn khi có giá trị 'q'
+        giang_viens = GIANGVIEN.objects.filter(HOTEN__icontains=query)
+    return render(request, 'login/giangvien_search.html', {'giang_viens': giang_viens, 'query': query})
 
 def hieutruong_search(request):
     giang_viens = None  # Đặt giang_viens là None hoặc một QuerySet rỗng
@@ -136,6 +142,9 @@ def view(request, magiangvien):
     giangvien = get_object_or_404(GIANGVIEN, MAGIANGVIEN=magiangvien)
     return render(request, 'login/view.html', {'giang_vien': giangvien})
 
+def giangvien_view(request, magiangvien):
+    giangvien = get_object_or_404(GIANGVIEN, MAGIANGVIEN=magiangvien)
+    return render(request, 'login/giangvien_view.html', {'giang_vien': giangvien})
 
 def hieutruong_view(request, magiangvien):
     giangvien = get_object_or_404(GIANGVIEN, MAGIANGVIEN=magiangvien)
