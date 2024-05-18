@@ -6,6 +6,7 @@ from django.template import loader
 from django.http import HttpResponse
 
 
+
 def login_hieutruong(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -178,7 +179,7 @@ def update_salary(request, magiangvien):
         return render(request, 'login/update_salary.html', {'teachers': [(teacher, hesoluong)]})
 
 
-def salary_slip(request, magiangvien):
+def salary_slip(request, magiangvien, sotietdaytoithieu = 50,luongtheogio = 24500):
     try:
         teacher = get_object_or_404(GIANGVIEN, pk=magiangvien)
         hesoluong = HESOLUONG.objects.get(
@@ -186,28 +187,32 @@ def salary_slip(request, magiangvien):
     except HESOLUONG.DoesNotExist:
         return HttpResponse("Salary coefficient not found for the provided instructor.", status=404)
     base_salary = 1800000
-    calculated_salary = base_salary * hesoluong.HESO
+    calculated_salaryM = base_salary * hesoluong.HESO
+    calculated_salaryY = base_salary * hesoluong.HESO * 12 +(teacher.SOTIETDAY - sotietdaytoithieu) * luongtheogio
     context = {
         'teacher': teacher,
         'base_salary': base_salary,
         'hesoluong': hesoluong.HESO,
-        'calculated_salary': calculated_salary
+        'calculated_salaryM': calculated_salaryM,
+        'calculated_salaryY': calculated_salaryY
     }
     return render(request, 'login/salary_slip.html', context)
 
 
-def hieutruong_salary_slip(request, magiangvien):
+def hieutruong_salary_slip(request, magiangvien, sotietdaytoithieu = 50,luongtheogio = 24500):
     try:
         teacher = get_object_or_404(GIANGVIEN, pk=magiangvien)
         hesoluong = HESOLUONG.objects.get(
             MABAC=teacher.MABAC_id, MANGACH=teacher.MANGACH_id)
         base_salary = 1800000
-        calculated_salary = base_salary * hesoluong.HESO
+        calculated_salaryM = base_salary * hesoluong.HESO
+        calculated_salaryY = base_salary * hesoluong.HESO * 12 +(teacher.SOTIETDAY - sotietdaytoithieu) * luongtheogio
         context = {
             'teacher': teacher,
             'base_salary': base_salary,
             'hesoluong': hesoluong.HESO,
-            'calculated_salary': calculated_salary
+            'calculated_salaryM': calculated_salaryM,
+            'calculated_salaryY': calculated_salaryY
         }
         return render(request, 'login/hieutruong_salary_slip.html', context)
     except HESOLUONG.DoesNotExist:
