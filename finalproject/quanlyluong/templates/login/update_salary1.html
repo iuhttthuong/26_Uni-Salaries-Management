@@ -1,0 +1,33 @@
+{% extends 'login/emp_base.html' %}
+
+{% block main %}
+    <h4 class="text-danger p-2" style="border-bottom: 2px solid orange;">Cập nhật hệ số lương</h4>
+    <form method="POST" action="{% url 'update_salary1' %}">
+        {% csrf_token %}
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Mã Ngạch</th>
+                        <th>Mã Bậc</th>
+                        <th>Hệ số lương</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for luong in luongs %}
+                    <tr>
+                        <td>{{ luong.MANGACH_paren }}</td>
+                        <td>{{ luong.MABAC_paren }}</td>
+                        <td>
+                            <input type="number" step="0.01" class="form-control" name="heso_{{ luong.id }}" value="{{ luong.HESO }}">
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Xác nhận</button>
+        </div>
+    </form>
+{% endblock %}

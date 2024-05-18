@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from .models import TAIKHOAN, GIANGVIEN, CAPBAC, HESOLUONG
 from django.template import loader
 from django.http import HttpResponse
-
+import re
 
 
 def login_hieutruong(request):
@@ -156,28 +156,29 @@ def hieutruong_view(request, magiangvien):
     return render(request, 'login/hieutruong_view.html', {'giang_vien': giangvien})
 
 
-def update_salary(request, magiangvien):
+def update_salary1(request):
     if request.method == 'POST':
         for key, value in request.POST.items():
-            if key.startswith('hesoluong_'):
-                magiangvien = key.split('_')[1]
+            if key.startswith('heso_'):
                 try:
-                    teacher = GIANGVIEN.objects.get(pk=magiangvien)
-                    hesoluong = HESOLUONG.objects.get(
-                        MABAC_id=teacher.MABAC_id, MANGACH_id=teacher.MANGACH_id)
-                    hesoluong.HESO = float(value)
-                    hesoluong.save()
-                    messages.success(request, 'Cập nhật thành công.')
-                except (GIANGVIEN.DoesNotExist, HESOLUONG.DoesNotExist):
-                    messages.error(
-                        request, 'Không tìm thấy giảng viên hoặc hệ số lương.')
-        return redirect('update_salary', magiangvien=magiangvien)
-    else:
-        teacher = GIANGVIEN.objects.get(pk=magiangvien)
-        hesoluong = HESOLUONG.objects.get(
-            MABAC_id=teacher.MABAC_id, MANGACH_id=teacher.MANGACH_id)
-        return render(request, 'login/update_salary.html', {'teachers': [(teacher, hesoluong)]})
+                    id = int(key.split('_')[1])
+                    heso_luong = HESOLUONG.objects.get(id=id)
+                    heso_luong.HESO = float(value)
+                    heso_luong.save()
+                except (HESOLUONG.DoesNotExist, ValueError) as e:
+                    print(e)
 
+    luongs = HESOLUONG.objects.all()
+
+    # Extract values inside parentheses for both MANGACH and MABAC
+    for luong in luongs:
+        mangach_match = re.search(r'\((.*?)\)', str(luong.MANGACH))
+        mabac_match = re.search(r'\((.*?)\)', str(luong.MABAC))
+
+        luong.MANGACH_paren = mangach_match.group(1) if mangach_match else ''
+        luong.MABAC_paren = mabac_match.group(1) if mabac_match else ''
+
+    return render(request, 'login/update_salary1.html', {'luongs': luongs, 'message': 'Cập nhật thành công.'})
 
 def salary_slip(request, magiangvien, sotietdaytoithieu = 50,luongtheogio = 24500):
     try:
