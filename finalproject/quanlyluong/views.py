@@ -215,6 +215,26 @@ def hieutruong_salary_slip(request, magiangvien):
     except HESOLUONG.MultipleObjectsReturned:
         return HttpResponse("Data inconsistency error.", status=500)
 
+def hieutruong_update(request, magiangvien):
+    teacher = get_object_or_404(GIANGVIEN, MAGIANGVIEN=magiangvien)
+    
+    if request.method == 'POST':
+        teacher.HOTEN = request.POST.get(f'hoten_{teacher.MAGIANGVIEN}', teacher.HOTEN)
+        teacher.NGAYSINH = request.POST.get(f'ngaysinh_{teacher.MAGIANGVIEN}', teacher.NGAYSINH)
+        teacher.GIOITINH = request.POST.get(f'gioitinh_{teacher.MAGIANGVIEN}', teacher.GIOITINH)
+        teacher.SODIENTHOAI = request.POST.get(f'sodienthoai_{teacher.MAGIANGVIEN}', teacher.SODIENTHOAI)
+        teacher.DIACHI = request.POST.get(f'diachi_{teacher.MAGIANGVIEN}', teacher.DIACHI)
+        teacher.NGAYVAOLAM = request.POST.get(f'ngayvaolam_{teacher.MAGIANGVIEN}', teacher.NGAYVAOLAM)
+        teacher.CHUCVU = request.POST.get(f'chucvu_{teacher.MAGIANGVIEN}', teacher.CHUCVU)
+        teacher.SOTIETDAY = request.POST.get(f'sotietday_{teacher.MAGIANGVIEN}', teacher.SOTIETDAY)
+        teacher.MABAC_id = request.POST.get(f'mabac_{teacher.MAGIANGVIEN}', teacher.MABAC_id)
+        teacher.MANGACH_id = request.POST.get(f'mangach_{teacher.MAGIANGVIEN}', teacher.MANGACH_id)
+        teacher.MATD_id = request.POST.get(f'matd_{teacher.MAGIANGVIEN}', teacher.MATD_id)
+        teacher.save()
+        return render(request, 'login/hieutruong_view.html', {'giang_vien': teacher})
+
+    return render(request, 'login/hieutruong_update.html', {'teacher': teacher})
+
 
 def logout_giangvien(request):
     # Kiểm tra xem session 'user_id' có tồn tại không

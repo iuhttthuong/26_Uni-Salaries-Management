@@ -22,6 +22,8 @@ urlpatterns = [
          views.hieutruong_view, name='hieutruong_view'),
     path('hieutruong_salary_slip/<str:magiangvien>/',
          views.hieutruong_salary_slip, name='hieutruong_salary_slip'),
+     path('hieutruong_update/<str:magiangvien>/',
+          views.hieutruong_update, name='hieutruong_update'),
     path('giangvien_home/', views.giangvien_home, name='giangvien_home'),
     path('giangvien_profile/', views.giangvien_profile,
          name='giangvien_profile'),

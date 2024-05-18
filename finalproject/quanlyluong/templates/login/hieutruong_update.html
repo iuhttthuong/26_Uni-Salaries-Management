@@ -1,0 +1,79 @@
+{% extends 'login/hieutruong_base.html' %}
+{% block title %}Cập nhật Thông tin Giảng viên{% endblock %}
+{% block main %}
+<div class="container">
+    <h2 class="text-center mt-4 mb-4">Cập nhật Thông tin Giảng viên</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group row">
+            <label for="hoten_{{ teacher.MAGIANGVIEN }}" class="col-sm-2 col-form-label">Họ và Tên</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="hoten_{{ teacher.MAGIANGVIEN }}" name="hoten_{{ teacher.MAGIANGVIEN }}" value="{{ teacher.HOTEN }}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="ngaysinh_{{ teacher.MAGIANGVIEN }}" class="col-sm-2 col-form-label">Ngày sinh</label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" id="ngaysinh_{{ teacher.MAGIANGVIEN }}" name="ngaysinh_{{ teacher.MAGIANGVIEN }}" value="{{ teacher.NGAYSINH }}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="gioitinh_{{ teacher.MAGIANGVIEN }}" class="col-sm-2 col-form-label">Giới tính</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="gioitinh_{{ teacher.MAGIANGVIEN }}" name="gioitinh_{{ teacher.MAGIANGVIEN }}" value="{{ teacher.GIOITINH }}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="sodienthoai_{{ teacher.MAGIANGVIEN }}" class="col-sm-2 col-form-label">Số điện thoại</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="sodienthoai_{{ teacher.MAGIANGVIEN }}" name="sodienthoai_{{ teacher.MAGIANGVIEN }}" value="{{ teacher.SODIENTHOAI }}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="diachi_{{ teacher.MAGIANGVIEN }}" class="col-sm-2 col-form-label">Địa chỉ</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="diachi_{{ teacher.MAGIANGVIEN }}" name="diachi_{{ teacher.MAGIANGVIEN }}" value="{{ teacher.DIACHI }}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="ngayvaolam_{{ teacher.MAGIANGVIEN }}" class="col-sm-2 col-form-label">Ngày vào làm</label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" id="ngayvaolam_{{ teacher.MAGIANGVIEN }}" name="ngayvaolam_{{ teacher.MAGIANGVIEN }}" value="{{ teacher.NGAYVAOLAM }}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="chucvu_{{ teacher.MAGIANGVIEN }}" class="col-sm-2 col-form-label">Chức vụ</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="chucvu_{{ teacher.MAGIANGVIEN }}" name="chucvu_{{ teacher.MAGIANGVIEN }}" value="{{ teacher.CHUCVU }}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="sotietday_{{ teacher.MAGIANGVIEN }}" class="col-sm-2 col-form-label">Số tiết dạy</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="sotietday_{{ teacher.MAGIANGVIEN }}" name="sotietday_{{ teacher.MAGIANGVIEN }}" value="{{ teacher.SOTIETDAY }}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="mabac_{{ teacher.MAGIANGVIEN }}" class="col-sm-2 col-form-label">Mã bậc</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="mabac_{{ teacher.MAGIANGVIEN }}" name="mabac_{{ teacher.MAGIANGVIEN }}" value="{{ teacher.MABAC_id }}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="mangach_{{ teacher.MAGIANGVIEN }}" class="col-sm-2 col-form-label">Mã ngạch</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="mangach_{{ teacher.MAGIANGVIEN }}" name="mangach_{{ teacher.MAGIANGVIEN }}" value="{{ teacher.MANGACH_id }}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="matd_{{ teacher.MAGIANGVIEN }}" class="col-sm-2 col-form-label">Mã trình độ</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="matd_{{ teacher.MAGIANGVIEN }}" name="matd_{{ teacher.MAGIANGVIEN }}" value="{{ teacher.MATD_id }}">
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary">Cập Nhật</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

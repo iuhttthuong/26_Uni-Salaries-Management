@@ -25,6 +25,9 @@
                     <a href="{% url 'hieutruong_salary_slip' magiangvien=giang_vien.MAGIANGVIEN %}" class="list-group-item list-group-item-warning list-group-item-action ">
                         IN PHIẾU LƯƠNG
                     </a>
+                    <a href="{% url 'hieutruong_update' magiangvien=giang_vien.MAGIANGVIEN %}" class="list-group-item list-group-item-warning list-group-item-action ">
+                        CHỈNH SỬA THÔNG TIN GIẢNG VIÊN
+                    </a>
                 {% endfor %}
             {% else %}
                 <p>Không tìm thấy giảng viên nào.</p>
