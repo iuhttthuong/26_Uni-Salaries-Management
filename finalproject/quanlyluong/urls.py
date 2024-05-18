@@ -10,7 +10,8 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('search/', views.search, name='search'),
     path('view/<int:magiangvien>/', views.view, name='view'),
-    path('update_salary/<str:mabac>/', views.update_salary, name='update_salary'),
+    path('update_salary/<int:magiangvien>/',
+         views.update_salary, name='update_salary'),
     path('salary_slip/<int:magiangvien>/',
          views.salary_slip, name='salary_slip'),
     path('hieutruong_home/', views.hieutruong_home, name='hieutruong_home'),
@@ -28,5 +29,6 @@ urlpatterns = [
     path('logout_ketoan/', views.logout_ketoan, name='logout_ketoan'),
     path('logout_hieutruong/', views.logout_hieutruong, name='logout_hieutruong'),
     path('giangvien_search/', views.giangvien_search, name='giangvien_search'),
-    path('giangvien_view/<int:magiangvien>/', views.giangvien_view, name='giangvien_view'),
+    path('giangvien_view/<int:magiangvien>/',
+         views.giangvien_view, name='giangvien_view'),
 ]

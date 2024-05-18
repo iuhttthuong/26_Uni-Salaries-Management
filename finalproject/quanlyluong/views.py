@@ -123,12 +123,14 @@ def search(request):
         giang_viens = GIANGVIEN.objects.filter(HOTEN__icontains=query)
     return render(request, 'login/search.html', {'giang_viens': giang_viens, 'query': query})
 
+
 def giangvien_search(request):
     giang_viens = None  # Đặt giang_viens là None hoặc một QuerySet rỗng
     query = request.GET.get('q')
     if query:  # Chỉ thực hiện truy vấn khi có giá trị 'q'
         giang_viens = GIANGVIEN.objects.filter(HOTEN__icontains=query)
     return render(request, 'login/giangvien_search.html', {'giang_viens': giang_viens, 'query': query})
+
 
 def hieutruong_search(request):
     giang_viens = None  # Đặt giang_viens là None hoặc một QuerySet rỗng
@@ -142,33 +144,38 @@ def view(request, magiangvien):
     giangvien = get_object_or_404(GIANGVIEN, MAGIANGVIEN=magiangvien)
     return render(request, 'login/view.html', {'giang_vien': giangvien})
 
+
 def giangvien_view(request, magiangvien):
     giangvien = get_object_or_404(GIANGVIEN, MAGIANGVIEN=magiangvien)
     return render(request, 'login/giangvien_view.html', {'giang_vien': giangvien})
+
 
 def hieutruong_view(request, magiangvien):
     giangvien = get_object_or_404(GIANGVIEN, MAGIANGVIEN=magiangvien)
     return render(request, 'login/hieutruong_view.html', {'giang_vien': giangvien})
 
 
-def update_salary(request, mabac):
+def update_salary(request, magiangvien):
     if request.method == 'POST':
-        # Lặp qua các mục trong request.POST
         for key, value in request.POST.items():
             if key.startswith('hesoluong_'):
-                mabac = key.split('_')[1]
+                magiangvien = key.split('_')[1]
                 try:
-                    hesoluong_record = HESOLUONG.objects.get(MABAC_id=mabac)
-                    hesoluong_record.HESO = float(value)
-                    hesoluong_record.save()
+                    teacher = GIANGVIEN.objects.get(pk=magiangvien)
+                    hesoluong = HESOLUONG.objects.get(
+                        MABAC_id=teacher.MABAC_id, MANGACH_id=teacher.MANGACH_id)
+                    hesoluong.HESO = float(value)
+                    hesoluong.save()
                     messages.success(request, 'Cập nhật thành công.')
-                except HESOLUONG.DoesNotExist:
-                    messages.error(request, 'Không tìm thấy hệ số lương.')
-        return redirect('update_salary', mabac=mabac)
+                except (GIANGVIEN.DoesNotExist, HESOLUONG.DoesNotExist):
+                    messages.error(
+                        request, 'Không tìm thấy giảng viên hoặc hệ số lương.')
+        return redirect('update_salary', magiangvien=magiangvien)
     else:
-        teachers = GIANGVIEN.objects.filter(
-            MABAC_id=mabac).select_related('MABAC')
-        return render(request, 'login/update_salary.html', {'teachers': teachers})
+        teacher = GIANGVIEN.objects.get(pk=magiangvien)
+        hesoluong = HESOLUONG.objects.get(
+            MABAC_id=teacher.MABAC_id, MANGACH_id=teacher.MANGACH_id)
+        return render(request, 'login/update_salary.html', {'teachers': [(teacher, hesoluong)]})
 
 
 def salary_slip(request, magiangvien):
