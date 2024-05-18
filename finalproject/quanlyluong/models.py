@@ -39,6 +39,7 @@ class GIANGVIEN(models.Model):
     NGAYVAOLAM = models.CharField(max_length=10)    
     CHUCVU = models.CharField(max_length=50)
     MANGACH = models.ForeignKey(NGACH, on_delete=models.CASCADE) 
+    SOTIETDAY = models.IntegerField()
     
 class TAIKHOAN(models.Model):
     giang_vien = models.OneToOneField(GIANGVIEN, on_delete=models.CASCADE, primary_key=True)
