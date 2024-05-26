@@ -50,7 +50,7 @@ body {
   
   .grid-container {
     display: grid;
-    grid-template-columns: 260px 1fr 1fr 1fr;
+    grid-template-columns: 300px 1fr 1fr 1fr;
     grid-template-rows: 0.2fr 3fr;
     grid-template-areas:
       'sidebar header header header'
@@ -60,7 +60,7 @@ body {
   .logout-button {
     display: inline-block;
     color: #fff;
-    background-color: rgb(red, green, blue); /* Red */
+    background-color: rgb(red, green, blue); 
     text-decoration: none;
     text-align: center;
     border-radius: 5px;
@@ -81,6 +81,7 @@ body {
   .header {
     grid-area: header;
     height: 60px;
+    width:85%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -89,6 +90,7 @@ body {
     font-size: 15px;
     color:black;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0 auto;
   }
   .image_iuh {
     height: auto;
@@ -124,7 +126,7 @@ body {
   
   .sidebar-brand {
     margin-top: 15px;
-    font-size: 30px;
+    font-size: 45px;
     font-weight: 700;
   }
   
@@ -140,7 +142,7 @@ body {
   
   .sidebar-list-item {
     padding: 20px 20px 20px 20px;
-    font-size: 18px;
+    font-size: 25px;
   }
   
   .sidebar-list-item:hover {
@@ -169,6 +171,9 @@ body {
     grid-area: main;
     overflow-y: auto;
     padding: 20px 20px;
+    width: 95%; 
+    margin: 0 auto;
+    gap: 20px;
   }
   
   .main-cards {
@@ -183,21 +188,27 @@ body {
   
   .image_iuh {
     flex: 1; 
-    max-width: 60%; 
+    max-width: 70%; 
+    height: auto;
+    object-fit: cover;
   }
   
   .text-box {
     background-color: #1E90FF; 
     color: #FFFFFF;
-    padding: 60px;
+    padding: 30px;
     border-radius: 5px;
     margin-left: 10px; 
-    width: 40%; 
-    font-size: 18px;
+    width: 45%; 
+    font-size: 17px;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
   }
   
   .text-box p {
     margin: 0;
+    text-align: justify;
   }
   .text-box h2 {
     margin-bottom: 10px; 
@@ -206,10 +217,10 @@ body {
   .box {
     background-color:  #1E90FF; 
     border-radius: 5px;
-    color: #FFFFFF;
-    width: calc(33.1% - 20px); 
-    height: 200px; 
-    margin: 20px 10px; 
+    color: #FFFFFF; 
+    width: 25vw; 
+    height: 10vw; 
+    margin: 30px 10px; 
     display: inline-block;
     vertical-align: top; 
     font-size: 18px;
@@ -223,6 +234,92 @@ body {
   }
   .box p {
     margin: 0;
+  }
+  .content-wrapper {
+    display: flex;
+    gap: 10px;
+  }
+  .custom-hr {
+    border-radius: 20px;
+    height: 15px;
+    width: 70%;
+    background: #1E90FF;
+    margin: 20px auto; 
+    margin-top: 40px;
+  }
+  .payroll {
+    display: flex;
+    align-items: flex-start; 
+    gap: 60px; 
+    margin-top: 60px  ;
+  }
+  
+  .image_pay {
+    max-width: 60%; 
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .info {
+    flex: 1;
+    text-align: left;
+  }
+  
+  .info h2 {
+    font-family: 'Helvetica Neue';
+    margin: 0 0 10px; 
+    font-size: 34px;
+    text-align: center;
+  }
+  .highlight {
+    font-family: 'Helvetica Neue';
+    color: #1E90FF;
+  }
+  
+  .info p {
+    margin: 0; 
+    font-size: 24px;
+    text-align: justify;
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+  .image_team {
+    width: auto; 
+    height: 60%;
+    border-radius: 10px; 
+    display: block;
+    margin: 30px auto; 
+  }
+  
+  .aboutus {
+    text-align: center;
+    padding-top: 25px;
+    font-size: 2em;
+    margin-top: 25px;
+  }
+  .highlight1{
+    color: #1E90FF;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+
+  .team p {
+    font-size: 18px;
+    text-align: center;
+    color: gray;
+    margin-left: 120px; 
+    margin-right: 120px; 
+  }
+  .rectangle {
+    width: 100%;
+    height: 100px; 
+    background-color: darkblue; 
+    margin-top: 40px; 
+  }
+  .rectangle p{
+    color: white; 
+    text-align: center; 
+    font-size: 16px; 
+    padding-top: 70px; 
   }
 
   @media screen and (max-width: 992px) {

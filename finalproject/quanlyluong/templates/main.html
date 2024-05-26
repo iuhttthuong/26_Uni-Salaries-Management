@@ -19,15 +19,14 @@
     <div class="grid-container">
       <header class="header">
         <div class="menu-icon" onclick="openSidebar()">
-          <span class="material-icons-outlined">menu</span> ID
+          <span class="material-icons-outlined">menu</span>
         </div>
         <div class="header-content">
-            <h1>Chương trình tính lương</h1>
+            {% comment %} <h1>Chương trình tính lương</h1> {% endcomment %}
           </div>  
           <ul>
           <div style="display: flex; align-items: center;">
             <span class="material-icons-outlined" style="margin-right: 15px;">email</span>
-            <span class="material-icons-outlined" style="margin-right: 15px;">notifications</span>
           </div>
           </ul>
       </header>  
@@ -37,7 +36,7 @@
         <div class="sidebar-title">
           
           <div class="sidebar-brand">
-            <span class="material-icons-outlined" >apps</span> Menu 
+            <span class="material-icons-outlined" >payments</span> Payroll
           </div>
           <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
         </div>
@@ -63,11 +62,11 @@
                 <span class="material-symbols-outlined">patient_list</span> Kế Toán
             </a>
           </li>
-          <li class="sidebar-list-item">
+          {% comment %} <li class="sidebar-list-item">
             <a href="#">
                 <span class="material-symbols-outlined">live_help</span> Hỗ trợ
             </a>
-          </li>
+          </li> {% endcomment %}
           {% comment %} <li class="sidebar-list-item">
             <a href="#">
               <span class="material-icons-outlined">settings</span> Cài đặt
@@ -86,9 +85,10 @@
           </p>
         </div>
         </div>
+        <div class="content-wrapper">
         <div class="box">
-          <h2>Về Team</h2>
-          <li> Xem thông tin</li>
+          <h2>Lượt truy cập</h2>
+          <h1 style="margin-top:15px;">1000</h1>
         </div>
         <div class="box">
           <h2>Thảo Luận</h2>
@@ -100,7 +100,29 @@
           <h2>Thông Báo</h2>
           <li>Cập nhật phiên bản 1.0</li>
         </div>
-        <p style="font-size:20px ;text-align:center;padding-top:15px">Chương trình được thực hiện bởi nhóm sinh viên trường Đại học Công nghiệp Thành phố Hồ Chí Minh</p>
+        </div>
+        <hr class="custom-hr"> 
+        <div class="payroll">
+          <img src="{% static 'app\images\payroll.png' %}" class='image_pay' style="height: 50%; width: 50%; border-radius:10px">
+          <div class ='info'>
+            <h2>Chương trình <span class="highlight">tính lương</span></h2>
+            <p>Trang web tính lương giảng viên trường Đại học Công nghiệp Thành phố Hồ Chí Minh cung cấp công cụ hỗ trợ tính toán và tra cứu thông tin lương dành riêng cho đội ngũ giảng viên,
+                đảm bảo minh bạch và tiện lợi trong việc quản lý thu nhập.
+            </p>
+          </div>
+      </div>
+      <h1 class = 'aboutus'> ABOUT <span class="highlight1">US</span></h1>
+      <p style="font-size:20px ;text-align:center;padding-top:20px;">Chương trình được thực hiện bởi nhóm sinh viên trường Đại học Công nghiệp Thành phố Hồ Chí Minh</p>
+      <img src="{% static 'app\images\i1.png' %}" class='image_team '>
+      <div class ='team'>
+      <p>Nhóm em hy vọng rằng trang web này sẽ trở thành một công cụ hữu ích cho giảng viên và nhà trường trong việc quản lý và theo dõi lương bổng. 
+        Đây cũng là cơ hội để chúng tôi học hỏi và áp dụng kiến thức vào thực tế, chuẩn bị cho tương lai nghề nghiệp sau này.
+      </p>
+        <div class="rectangle">
+            <p>© 2021 Trường Đại học Công nghiệp Thành phố Hồ Chí Minh</p>
+        </div>
+      </div>
+      </div>
       </main>
     </div>
   </body>
