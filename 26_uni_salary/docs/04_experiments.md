@@ -25,4 +25,5 @@ Extensions: Visual Studio Code,DB browser (SQLite)
   + Liên kết với các trang web quản lý lịch giảng dạy của trường để có thể tính chính xác số tiết dạy dựa vào lịch giảng dạy của giảng viên.
   + Lấy các giờ nghiên cứu khoa học để tính thêm tiền lương cho giảng viên.
   + Liên kết với các trang web về HR của trường để điều chỉnh lại chức năng thêm giảng viên.
+  + Cập nhật thêm mã số thuế người phụ thuộc 
   
