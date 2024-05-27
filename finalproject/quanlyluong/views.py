@@ -195,7 +195,8 @@ def salary_slip(request, magiangvien, sotietdaytoithieu = 50,luongtheogio = 2450
         'base_salary': base_salary,
         'hesoluong': hesoluong.HESO,
         'calculated_salaryM': calculated_salaryM,
-        'calculated_salaryY': calculated_salaryY
+        'calculated_salaryY': calculated_salaryY,
+        'final_salary': calculated_salaryY + calculated_salaryY*0.3 - calculated_salaryY*0.105
     }
     return render(request, 'login/salary_slip.html', context)
 
@@ -213,7 +214,8 @@ def hieutruong_salary_slip(request, magiangvien, sotietdaytoithieu = 50,luongthe
             'base_salary': base_salary,
             'hesoluong': hesoluong.HESO,
             'calculated_salaryM': calculated_salaryM,
-            'calculated_salaryY': calculated_salaryY
+            'calculated_salaryY': calculated_salaryY,
+            'final_salary': calculated_salaryY + calculated_salaryY*0.3 - calculated_salaryY*0.105
         }
         return render(request, 'login/hieutruong_salary_slip.html', context)
     except HESOLUONG.DoesNotExist:
