@@ -1,4 +1,4 @@
-# Phần mềm quản lý lương giản viên
+# Phần mềm quản lý lương giảng viên
 
 - Đây là phần mềm giúp quản lý lương giảng viên một cách đơn giản với 3 đối tượng chính: giảng viên, hiệu trưởng và kế toán. Phần mềm có một vài chức năng cơ bản như: thêm, sửa, xoá thông tin giảng viên; xem thông tin giảng viên; in phiếu lương và một vài chức năng khác đang trong giai đoạn phát triển.
 - Một số sceenshot của ứng dụng
