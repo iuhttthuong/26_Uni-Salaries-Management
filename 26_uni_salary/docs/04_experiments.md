@@ -19,8 +19,10 @@ Extensions: Visual Studio Code,DB browser (SQLite)
 
 ### 4.3. Kết quả
 
-- Làm được
-- Chưa làm được
+- Làm được:
+  + Hoàn thiện được sản phẩm với gần như đầy đủ các chức năng đã đặt ra.
+- Chưa làm được:
+  + Chưa chuyên nghiệp về phần nghiệp vụ.
 - Hướng phát triển:
   + Liên kết với các trang web quản lý lịch giảng dạy của trường để có thể tính chính xác số tiết dạy dựa vào lịch giảng dạy của giảng viên.
   + Lấy các giờ nghiên cứu khoa học để tính thêm tiền lương cho giảng viên.
