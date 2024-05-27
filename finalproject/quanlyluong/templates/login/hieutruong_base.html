@@ -27,6 +27,8 @@
                 <a href="{% url 'hieutruong_home'  %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'hieutruong_home' %}active{% endif %}">TRANG CHỦ</a>
                 <a href="{% url 'hieutruong_profile' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'hieutruong_profile' %}active{% endif %}">THÔNG TIN CÁ NHÂN</a>
                 <a href="{% url 'hieutruong_search' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'hieutruong_search' %}active{% endif %}">TÌM KIẾM GIẢNG VIÊN</a>
+                <a href="{% url 'add_giangvien' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'add_giangvien' %}active{% endif %}">THÊM GIẢNG VIÊN</a>
+                <a href="{% url 'delete_giangvien' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'delete_giangvien' %}active{% endif %}">XÓA GIẢNG VIÊN</a>
                 <a href="{% url 'login_hieutruong' %}" class="list-group-item list-group-item-warning list-group-item-action {% if request.resolver_match.url_name == 'logout_hieutruong' %}active{% endif %} ">ĐĂNG XUẤT</a>
             </div>
         </div>

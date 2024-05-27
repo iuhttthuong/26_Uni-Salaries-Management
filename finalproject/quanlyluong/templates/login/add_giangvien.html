@@ -1,0 +1,74 @@
+{% extends 'login/hieutruong_base.html' %}
+
+{% block main %}
+{% if messages %}
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    {% for message in messages %}
+        <p{% if message.tags %} class="alert {{ message.tags }}"{% endif %}>{{ message }}</p>
+    {% endfor %}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endif %}
+<div class="container">
+  <h2>Thêm Giảng Viên Mới</h2>
+  <form method="post" class="needs-validation" novalidate>
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="id_MAGIANGVIEN">Mã Giảng Viên:</label>
+      {{ form.MAGIANGVIEN }}
+    </div>
+    <div class="form-group">
+      <label for="id_MATD">Trình Độ:</label>
+      {{ form.MATD }}
+    </div>
+    <div class="form-group">
+      <label for="id_HOTEN">Họ và Tên:</label>
+      {{ form.HOTEN }}
+    </div>
+    <div class="form-group">
+      <label for="id_NGAYSINH">Ngày Sinh:</label>
+      {{ form.NGAYSINH }}
+    </div>
+    <div class="form-group">
+        <label>Giới Tính:</label>
+        {% for radio in form.GIOITINH %}
+          <div class="form-check">
+            {{ radio }}
+            {{ radio.label_tag }}
+          </div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+      <label for="id_SODIENTHOAI">Số Điện Thoại:</label>
+      {{ form.SODIENTHOAI }}
+    </div>
+    <div class="form-group">
+      <label for="id_DIACHI">Địa Chỉ:</label>
+      {{ form.DIACHI }}
+    </div>
+    <div class="form-group">
+      <label for="id_MABAC">Mã Bậc:</label>
+      {{ form.MABAC }}
+    </div>
+    <div class="form-group">
+      <label for="id_NGAYVAOLAM">Ngày Vào Làm:</label>
+      {{ form.NGAYVAOLAM }}
+    </div>
+    <div class="form-group">
+      <label for="id_CHUCVU">Chức Vụ:</label>
+      {{ form.CHUCVU }}
+    </div>
+    <div class="form-group">
+      <label for="id_MANGACH">Mã Ngạch:</label>
+      {{ form.MANGACH }}
+    </div>
+    <div class="form-group">
+      <label for="id_SOTIETDAY">Số Tiết Dạy:</label>
+      {{ form.SOTIETDAY }}
+    </div>
+    <button type="submit" class="btn btn-primary">Thêm Giảng Viên</button>
+  </form>
+</div>
+{% endblock %}

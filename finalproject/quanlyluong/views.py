@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .models import TAIKHOAN, GIANGVIEN, CAPBAC, HESOLUONG
+from .models import TAIKHOAN, GIANGVIEN, CAPBAC, HESOLUONG, TRINHDO, NGACH
+from .forms import GiangVienForm
 from django.template import loader
 from django.http import HttpResponse
 import re
 import csv
 import datetime
 import os
+
 
 def login_hieutruong(request):
     if request.method == 'POST':
@@ -161,7 +163,7 @@ def hieutruong_view(request, magiangvien):
 def update_salary1(request):
     change_log_path = 'change_log.csv'
     salary_coefficients_path = 'salary_coefficients.csv'
-    
+
     if request.method == 'POST':
         reason = request.POST.get('reason')
         if not reason:
@@ -201,7 +203,8 @@ def update_salary1(request):
             try:
                 with open(change_log_path, 'a', newline='', encoding='utf-8') as f:
                     writer = csv.writer(f)
-                    writer.writerow([datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), reason, change_count])
+                    writer.writerow([datetime.datetime.now().strftime(
+                        '%Y-%m-%d %H:%M:%S'), reason, change_count])
             except Exception as e:
                 print(f"Lỗi khi ghi vào file change_log.csv: {e}")
 
@@ -213,15 +216,18 @@ def update_salary1(request):
             mangach_match = re.search(r'\((.*?)\)', str(luong.MANGACH))
             mabac_match = re.search(r'\((.*?)\)', str(luong.MABAC))
 
-            luong.MANGACH_paren = mangach_match.group(1) if mangach_match else luong.MANGACH
-            luong.MABAC_paren = mabac_match.group(1) if mabac_match else luong.MABAC
+            luong.MANGACH_paren = mangach_match.group(
+                1) if mangach_match else luong.MANGACH
+            luong.MABAC_paren = mabac_match.group(
+                1) if mabac_match else luong.MABAC
 
         try:
             with open(salary_coefficients_path, 'w', newline='', encoding='utf-8') as f:
                 writer = csv.writer(f)
                 writer.writerow(['Mã Ngạch', 'Mã Bậc', 'Hệ số lương'])
                 for luong in luongs:
-                    writer.writerow([luong.MANGACH_paren, luong.MABAC_paren, luong.HESO])
+                    writer.writerow(
+                        [luong.MANGACH_paren, luong.MABAC_paren, luong.HESO])
         except Exception as e:
             print(f"Lỗi khi ghi vào file salary_coefficients.csv: {e}")
 
@@ -236,11 +242,15 @@ def update_salary1(request):
             mangach_match = re.search(r'\((.*?)\)', str(luong.MANGACH))
             mabac_match = re.search(r'\((.*?)\)', str(luong.MABAC))
 
-            luong.MANGACH_paren = mangach_match.group(1) if mangach_match else luong.MANGACH
-            luong.MABAC_paren = mabac_match.group(1) if mabac_match else luong.MABAC
+            luong.MANGACH_paren = mangach_match.group(
+                1) if mangach_match else luong.MANGACH
+            luong.MABAC_paren = mabac_match.group(
+                1) if mabac_match else luong.MABAC
 
         return render(request, 'login/update_salary1.html', {'luongs': luongs})
-def salary_slip(request, magiangvien, sotietdaytoithieu = 50,luongtheogio = 24500):
+
+
+def salary_slip(request, magiangvien, sotietdaytoithieu=50, luongtheogio=24500):
     try:
         teacher = get_object_or_404(GIANGVIEN, pk=magiangvien)
         hesoluong = HESOLUONG.objects.get(
@@ -249,7 +259,8 @@ def salary_slip(request, magiangvien, sotietdaytoithieu = 50,luongtheogio = 2450
         return HttpResponse("Salary coefficient not found for the provided instructor.", status=404)
     base_salary = 1800000
     calculated_salaryM = base_salary * hesoluong.HESO
-    calculated_salaryY = base_salary * hesoluong.HESO * 12 +(teacher.SOTIETDAY - sotietdaytoithieu) * luongtheogio
+    calculated_salaryY = base_salary * hesoluong.HESO * 12 + \
+        (teacher.SOTIETDAY - sotietdaytoithieu) * luongtheogio
     context = {
         'teacher': teacher,
         'base_salary': base_salary,
@@ -261,14 +272,15 @@ def salary_slip(request, magiangvien, sotietdaytoithieu = 50,luongtheogio = 2450
     return render(request, 'login/salary_slip.html', context)
 
 
-def hieutruong_salary_slip(request, magiangvien, sotietdaytoithieu = 50,luongtheogio = 24500):
+def hieutruong_salary_slip(request, magiangvien, sotietdaytoithieu=50, luongtheogio=24500):
     try:
         teacher = get_object_or_404(GIANGVIEN, pk=magiangvien)
         hesoluong = HESOLUONG.objects.get(
             MABAC=teacher.MABAC_id, MANGACH=teacher.MANGACH_id)
         base_salary = 1800000
         calculated_salaryM = base_salary * hesoluong.HESO
-        calculated_salaryY = base_salary * hesoluong.HESO * 12 +(teacher.SOTIETDAY - sotietdaytoithieu) * luongtheogio
+        calculated_salaryY = base_salary * hesoluong.HESO * 12 + \
+            (teacher.SOTIETDAY - sotietdaytoithieu) * luongtheogio
         context = {
             'teacher': teacher,
             'base_salary': base_salary,
@@ -283,25 +295,79 @@ def hieutruong_salary_slip(request, magiangvien, sotietdaytoithieu = 50,luongthe
     except HESOLUONG.MultipleObjectsReturned:
         return HttpResponse("Data inconsistency error.", status=500)
 
+
 def hieutruong_update(request, magiangvien):
     teacher = get_object_or_404(GIANGVIEN, MAGIANGVIEN=magiangvien)
-    
+
     if request.method == 'POST':
-        teacher.HOTEN = request.POST.get(f'hoten_{teacher.MAGIANGVIEN}', teacher.HOTEN)
-        teacher.NGAYSINH = request.POST.get(f'ngaysinh_{teacher.MAGIANGVIEN}', teacher.NGAYSINH)
-        teacher.GIOITINH = request.POST.get(f'gioitinh_{teacher.MAGIANGVIEN}', teacher.GIOITINH)
-        teacher.SODIENTHOAI = request.POST.get(f'sodienthoai_{teacher.MAGIANGVIEN}', teacher.SODIENTHOAI)
-        teacher.DIACHI = request.POST.get(f'diachi_{teacher.MAGIANGVIEN}', teacher.DIACHI)
-        teacher.NGAYVAOLAM = request.POST.get(f'ngayvaolam_{teacher.MAGIANGVIEN}', teacher.NGAYVAOLAM)
-        teacher.CHUCVU = request.POST.get(f'chucvu_{teacher.MAGIANGVIEN}', teacher.CHUCVU)
-        teacher.SOTIETDAY = request.POST.get(f'sotietday_{teacher.MAGIANGVIEN}', teacher.SOTIETDAY)
-        teacher.MABAC_id = request.POST.get(f'mabac_{teacher.MAGIANGVIEN}', teacher.MABAC_id)
-        teacher.MANGACH_id = request.POST.get(f'mangach_{teacher.MAGIANGVIEN}', teacher.MANGACH_id)
-        teacher.MATD_id = request.POST.get(f'matd_{teacher.MAGIANGVIEN}', teacher.MATD_id)
+        teacher.HOTEN = request.POST.get(
+            f'hoten_{teacher.MAGIANGVIEN}', teacher.HOTEN)
+        teacher.NGAYSINH = request.POST.get(
+            f'ngaysinh_{teacher.MAGIANGVIEN}', teacher.NGAYSINH)
+        teacher.GIOITINH = request.POST.get(
+            f'gioitinh_{teacher.MAGIANGVIEN}', teacher.GIOITINH)
+        teacher.SODIENTHOAI = request.POST.get(
+            f'sodienthoai_{teacher.MAGIANGVIEN}', teacher.SODIENTHOAI)
+        teacher.DIACHI = request.POST.get(
+            f'diachi_{teacher.MAGIANGVIEN}', teacher.DIACHI)
+        teacher.NGAYVAOLAM = request.POST.get(
+            f'ngayvaolam_{teacher.MAGIANGVIEN}', teacher.NGAYVAOLAM)
+        teacher.CHUCVU = request.POST.get(
+            f'chucvu_{teacher.MAGIANGVIEN}', teacher.CHUCVU)
+        teacher.SOTIETDAY = request.POST.get(
+            f'sotietday_{teacher.MAGIANGVIEN}', teacher.SOTIETDAY)
+        teacher.MABAC_id = request.POST.get(
+            f'mabac_{teacher.MAGIANGVIEN}', teacher.MABAC_id)
+        teacher.MANGACH_id = request.POST.get(
+            f'mangach_{teacher.MAGIANGVIEN}', teacher.MANGACH_id)
+        teacher.MATD_id = request.POST.get(
+            f'matd_{teacher.MAGIANGVIEN}', teacher.MATD_id)
         teacher.save()
         return render(request, 'login/hieutruong_view.html', {'giang_vien': teacher})
 
     return render(request, 'login/hieutruong_update.html', {'teacher': teacher})
+
+
+def add_giangvien(request):
+    if request.method == 'POST':
+        form = GiangVienForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Giảng viên đã được thêm thành công.')
+            return redirect('add_giangvien')
+        else:
+            messages.error(
+                request, 'Có lỗi xảy ra khi thêm giảng viên. Vui lòng kiểm tra lại thông tin.')
+    else:
+        form = GiangVienForm()
+
+    context = {
+        'form': form,
+        'trinh_do_list': TRINHDO.objects.all(),
+        'cap_bac_list': CAPBAC.objects.all(),
+        'ngach_list': NGACH.objects.all(),
+        'he_so_list': HESOLUONG.objects.all(),
+    }
+    return render(request, 'login/add_giangvien.html', context)
+
+
+def delete_giangvien(request):
+    giangviens = GIANGVIEN.objects.all()  # Lấy tất cả giảng viên
+    if request.method == 'POST':
+        giangvien_id = request.POST.get('giangvien_id')
+        giangvien = GIANGVIEN.objects.filter(
+            MAGIANGVIEN=giangvien_id).first()  # Lọc giảng viên theo MAGIANGVIEN
+        if giangvien:
+            giangvien.delete()
+            messages.success(request, 'Xóa giảng viên thành công.')
+        else:
+            messages.error(request, 'Không tìm thấy giảng viên để xóa.')
+        return redirect('delete_giangvien')
+
+    context = {
+        'giangviens': giangviens,
+    }
+    return render(request, 'login/delete_giangvien.html', context)
 
 
 def logout_giangvien(request):
