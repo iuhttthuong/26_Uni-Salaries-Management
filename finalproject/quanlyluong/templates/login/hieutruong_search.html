@@ -16,22 +16,52 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            {% if giang_viens %}
-                {% for giang_vien in giang_viens %}
-                    <li>{{ giang_vien.HOTEN }}</li>
-                    <a href="{% url 'hieutruong_view' magiangvien=giang_vien.MAGIANGVIEN %}" class="list-group-item list-group-item-warning list-group-item-action ">
-                        XEM THÔNG TIN GIẢNG VIÊN
-                    </a>
-                    <a href="{% url 'hieutruong_salary_slip' magiangvien=giang_vien.MAGIANGVIEN %}" class="list-group-item list-group-item-warning list-group-item-action ">
-                        IN PHIẾU LƯƠNG
-                    </a>
-                    <a href="{% url 'hieutruong_update' magiangvien=giang_vien.MAGIANGVIEN %}" class="list-group-item list-group-item-warning list-group-item-action ">
-                        CHỈNH SỬA THÔNG TIN GIẢNG VIÊN
-                    </a>
-                {% endfor %}
+            {% if giang_viens %}    
+                <ul id="giang-vien-list" style="list-style: none; padding-left: 0;">
+                    {% for giang_vien in giang_viens %}
+                        <li style="margin-bottom: 10px;">
+                            <a href="#" class="giang-vien-link" data-id="{{ giang_vien.MAGIANGVIEN }}" style="text-decoration: none; font-weight: bold; display: block; padding: 10px; border: 1px solid #7575fb; border-radius: 5px; background-color: #faf9f9;">
+                                {{ giang_vien.HOTEN }}
+                            </a>
+                            <div id="options-{{ giang_vien.MAGIANGVIEN }}" class="options" style="display: none; margin-top: 5px;">
+                                <a href="{% url 'hieutruong_view' magiangvien=giang_vien.MAGIANGVIEN %}" class="list-group-item list-group-item-warning list-group-item-action" style="display: block; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 5px; background-color: #f0ad4e;">
+                                    XEM THÔNG TIN GIẢNG VIÊN
+                                </a>
+                                <a href="{% url 'hieutruong_salary_slip' magiangvien=giang_vien.MAGIANGVIEN %}" class="list-group-item list-group-item-warning list-group-item-action" style="display: block; padding: 10px; border: 2px solid #be6818d6; border-radius: 5px; margin-bottom: 5px; background-color: #f0ad4e;">
+                                    IN PHIẾU LƯƠNG
+                                </a>
+                                <a href="{% url 'hieutruong_update' magiangvien=giang_vien.MAGIANGVIEN %}" class="list-group-item list-group-item-warning list-group-item-action" style="display: block; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #f0ad4e;">    
+                                    CHỈNH SỬA THÔNG TIN GIẢNG VIÊN
+                                </a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
             {% else %}
                 <p>Không tìm thấy giảng viên nào.</p>
             {% endif %}
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const giangVienLinks = document.querySelectorAll('.giang-vien-link');
+
+            giangVienLinks.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const id = this.getAttribute('data-id');
+                    const options = document.querySelectorAll('.options');
+
+                    options.forEach(option => {
+                        if (option.id === 'options-' + id) {
+                            option.style.display = option.style.display === 'none' ? 'block' : 'none';
+                        } else {
+                            option.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 {% endblock %}
