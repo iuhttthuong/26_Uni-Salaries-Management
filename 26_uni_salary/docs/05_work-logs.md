@@ -46,7 +46,7 @@ Phạm Thành Công
         - Thực hiện công việc 5: Trương Thanh Hướng
     - Vấn đề
         - Vấn đề 1:Cập nhật giao diện ,login
-        - Vấn đề 2:add file dataset, sua readme
+        - Vấn đề 2:add file dataset, sua readme, xây hàm tính lương
         - Vấn đề 3: fix lỗi
         - Vấn đề 4: add salary year, add update teacher
         - Vấn đề 5:Cập nhật chức năng sửa hệ thống lương
