@@ -32,7 +32,7 @@ Phạm Thành Công
         - Thực hiện công việc 5: Kiều Minh Tuấn
     - Vấn đề
         - Vấn đề 1:Xây đựng giao diện trang chủ + login
-        - Vấn đề 2:Thêm logout
+        - Vấn đề 2:Thêm logout, dựng giao diện hiệu trưởng, giảng viên
         - Vấn đề 3:Dựng Dataset
         - Vấn đề 4: fix bug hàm HESOLUONG và update base salary
         - Vấn đề 5: fix login
