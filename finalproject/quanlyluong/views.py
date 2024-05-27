@@ -7,6 +7,7 @@ from django.http import HttpResponse
 import re
 import csv
 import datetime
+import os
 
 def login_hieutruong(request):
     if request.method == 'POST':
@@ -158,36 +159,51 @@ def hieutruong_view(request, magiangvien):
 
 
 def update_salary1(request):
+    change_log_path = 'change_log.csv'
+    salary_coefficients_path = 'salary_coefficients.csv'
+    
     if request.method == 'POST':
         reason = request.POST.get('reason')
+        if not reason:
+            return render(request, 'login/update_salary1.html', {'luongs': HESOLUONG.objects.all(), 'message': 'Lý do thay đổi không được để trống.'})
+
         change_count = 1  # Initialize the change count
 
         # Read the existing change count from the CSV file
-        try:
-            with open('change_log.csv', 'r', encoding='utf-8') as f:
-                reader = csv.reader(f)
-                rows = list(reader)
-                if rows:
-                    last_row = rows[-1]
-                    change_count = int(last_row[2]) + 1
-        except FileNotFoundError:
-            pass
+        if os.path.exists(change_log_path):
+            try:
+                with open(change_log_path, 'r', encoding='utf-8') as f:
+                    reader = csv.reader(f)
+                    rows = list(reader)
+                    if rows:
+                        last_row = rows[-1]
+                        change_count = int(last_row[2]) + 1
+            except FileNotFoundError:
+                pass
+
+        changes_made = False
 
         for key, value in request.POST.items():
             if key.startswith('heso_'):
                 try:
                     id = int(key.split('_')[1])
                     heso_luong = HESOLUONG.objects.get(id=id)
-                    heso_luong.HESO = float(value)
-                    heso_luong.save()
-
-                    # Log the change in the CSV file
-                    with open('change_log.csv', 'a', newline='', encoding='utf-8') as f:
-                        writer = csv.writer(f)
-                        writer.writerow([datetime.datetime.now(), reason, change_count])
-                    break
+                    new_heso = float(value)
+                    if heso_luong.HESO != new_heso:
+                        heso_luong.HESO = new_heso
+                        heso_luong.save()
+                        changes_made = True
                 except (HESOLUONG.DoesNotExist, ValueError) as e:
                     print(e)
+
+        if changes_made:
+            # Log the change in the CSV file
+            try:
+                with open(change_log_path, 'a', newline='', encoding='utf-8') as f:
+                    writer = csv.writer(f)
+                    writer.writerow([datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), reason, change_count])
+            except Exception as e:
+                print(f"Lỗi khi ghi vào file change_log.csv: {e}")
 
         # Save the updated salary coefficients to a CSV file
         luongs = HESOLUONG.objects.all()
@@ -200,14 +216,30 @@ def update_salary1(request):
             luong.MANGACH_paren = mangach_match.group(1) if mangach_match else luong.MANGACH
             luong.MABAC_paren = mabac_match.group(1) if mabac_match else luong.MABAC
 
-        with open('salary_coefficients.csv', 'w', newline='', encoding='utf-8') as f:
-            writer = csv.writer(f)
-            writer.writerow(['Mã Ngạch', 'Mã Bậc', 'Hệ số lương'])
-            for luong in luongs:
-                writer.writerow([luong.MANGACH_paren, luong.MABAC_paren, luong.HESO])
+        try:
+            with open(salary_coefficients_path, 'w', newline='', encoding='utf-8') as f:
+                writer = csv.writer(f)
+                writer.writerow(['Mã Ngạch', 'Mã Bậc', 'Hệ số lương'])
+                for luong in luongs:
+                    writer.writerow([luong.MANGACH_paren, luong.MABAC_paren, luong.HESO])
+        except Exception as e:
+            print(f"Lỗi khi ghi vào file salary_coefficients.csv: {e}")
 
-    return render(request, 'login/update_salary1.html', {'luongs': luongs, 'message': 'Cập nhật thành công.'})
+        return render(request, 'login/update_salary1.html', {'luongs': luongs, 'message': 'Cập nhật thành công.'})
 
+    else:
+        # Handle GET request
+        luongs = HESOLUONG.objects.all()
+
+        # Extract values inside parentheses for both MANGACH and MABAC
+        for luong in luongs:
+            mangach_match = re.search(r'\((.*?)\)', str(luong.MANGACH))
+            mabac_match = re.search(r'\((.*?)\)', str(luong.MABAC))
+
+            luong.MANGACH_paren = mangach_match.group(1) if mangach_match else luong.MANGACH
+            luong.MABAC_paren = mabac_match.group(1) if mabac_match else luong.MABAC
+
+        return render(request, 'login/update_salary1.html', {'luongs': luongs})
 def salary_slip(request, magiangvien, sotietdaytoithieu = 50,luongtheogio = 24500):
     try:
         teacher = get_object_or_404(GIANGVIEN, pk=magiangvien)
