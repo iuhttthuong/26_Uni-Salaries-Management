@@ -3,6 +3,13 @@
 - Đây là phần mềm giúp quản lý lương giảng viên một cách đơn giản với 3 đối tượng chính: giảng viên, hiệu trưởng và kế toán. Phần mềm có một vài chức năng cơ bản như: thêm, sửa, xoá thông tin giảng viên; xem thông tin giảng viên; in phiếu lương và một vài chức năng khác đang trong giai đoạn phát triển.
 - Bạn có thể trải nghiệm ứng dụng ở đây [LINK](https://update-this-link)
 - Một số sceenshot của ứng dụng
+![image](https://github.com/iuhttthuong/26_Uni-Salaries-Management/assets/128958794/0582b9de-bba3-41ea-9158-4d1fb0cb2e31)
+![image](https://github.com/iuhttthuong/26_Uni-Salaries-Management/assets/128958794/eed4654b-9dc8-4738-bd9e-7d1fa6d37a57)
+![image](https://github.com/iuhttthuong/26_Uni-Salaries-Management/assets/128958794/5113f8c3-64be-4045-b3ad-c572093293d0)
+![image](https://github.com/iuhttthuong/26_Uni-Salaries-Management/assets/128958794/2d48ec68-8894-4cf2-ac66-7d50d2eea41e)
+
+
+
 
 ## CÀI ĐẶT
 
@@ -27,14 +34,10 @@ Hướng dẫn cài đặt và chạy sau khi pull project từ github về (Lư
 ## TRÁCH NHIỆM
 
 - Trương Thanh Hướng:
-    - trách nhiệm 1
-    - trách nhiệm 2
+    - Backend
 - Kiều Minh Tuấn
-    - trách nhiệm 1
-    - trách nhiệm 2
+    - Frontend
 - Trương Trọng Hậu
-    - trách nhiệm 1
-    - trách nhiệm 2
+    - Backend
 - Phạm Thành Công
-    - trách nhiệm 1
-    - trách nhiệm 2
+    - Frontend
