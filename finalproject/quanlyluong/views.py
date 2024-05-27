@@ -5,7 +5,8 @@ from .models import TAIKHOAN, GIANGVIEN, CAPBAC, HESOLUONG
 from django.template import loader
 from django.http import HttpResponse
 import re
-
+import csv
+import datetime
 
 def login_hieutruong(request):
     if request.method == 'POST':
@@ -158,6 +159,20 @@ def hieutruong_view(request, magiangvien):
 
 def update_salary1(request):
     if request.method == 'POST':
+        reason = request.POST.get('reason')
+        change_count = 1  # Initialize the change count
+
+        # Read the existing change count from the CSV file
+        try:
+            with open('change_log.csv', 'r', encoding='utf-8') as f:
+                reader = csv.reader(f)
+                rows = list(reader)
+                if rows:
+                    last_row = rows[-1]
+                    change_count = int(last_row[2]) + 1
+        except FileNotFoundError:
+            pass
+
         for key, value in request.POST.items():
             if key.startswith('heso_'):
                 try:
@@ -165,18 +180,31 @@ def update_salary1(request):
                     heso_luong = HESOLUONG.objects.get(id=id)
                     heso_luong.HESO = float(value)
                     heso_luong.save()
+
+                    # Log the change in the CSV file
+                    with open('change_log.csv', 'a', newline='', encoding='utf-8') as f:
+                        writer = csv.writer(f)
+                        writer.writerow([datetime.datetime.now(), reason, change_count])
+                    break
                 except (HESOLUONG.DoesNotExist, ValueError) as e:
                     print(e)
 
-    luongs = HESOLUONG.objects.all()
+        # Save the updated salary coefficients to a CSV file
+        luongs = HESOLUONG.objects.all()
 
-    # Extract values inside parentheses for both MANGACH and MABAC
-    for luong in luongs:
-        mangach_match = re.search(r'\((.*?)\)', str(luong.MANGACH))
-        mabac_match = re.search(r'\((.*?)\)', str(luong.MABAC))
+        # Extract values inside parentheses for both MANGACH and MABAC
+        for luong in luongs:
+            mangach_match = re.search(r'\((.*?)\)', str(luong.MANGACH))
+            mabac_match = re.search(r'\((.*?)\)', str(luong.MABAC))
 
-        luong.MANGACH_paren = mangach_match.group(1) if mangach_match else ''
-        luong.MABAC_paren = mabac_match.group(1) if mabac_match else ''
+            luong.MANGACH_paren = mangach_match.group(1) if mangach_match else luong.MANGACH
+            luong.MABAC_paren = mabac_match.group(1) if mabac_match else luong.MABAC
+
+        with open('salary_coefficients.csv', 'w', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            writer.writerow(['Mã Ngạch', 'Mã Bậc', 'Hệ số lương'])
+            for luong in luongs:
+                writer.writerow([luong.MANGACH_paren, luong.MABAC_paren, luong.HESO])
 
     return render(request, 'login/update_salary1.html', {'luongs': luongs, 'message': 'Cập nhật thành công.'})
 
