@@ -1,4 +1,4 @@
-![image](https://github.com/iuhttthuong/final-project-salary-for-university/assets/111831564/b07652a2-1502-4a81-9e2e-c55a4d88a3e4)![image](https://github.com/iuhttthuong/final-project-salary-for-university/assets/111831564/92268581-53e9-48c8-a509-2266fc4038e6)## 1. KẾ HOẠCH
+## 1. KẾ HOẠCH
 ![image](https://github.com/iuhttthuong/final-project-salary-for-university/assets/111831564/1888228e-aa73-4a03-aa4e-d0ad0b8ceb0a)
 
 ### 1.2 Mô tả ý tưởng đề tài
